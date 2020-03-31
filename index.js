@@ -27,7 +27,7 @@ const createAnswerButton = element => {
 const root = document.querySelector('#wrapper');
 const answers = [];
 
-const firstBond = document.querySelector('#randomNumber');
+const firstBond = document.querySelector('#randomBond');
 firstBond.innerText = getRandomInt(10);
 
 const correctAnswer = 10 - parseInt(firstBond.innerText);
