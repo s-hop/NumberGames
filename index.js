@@ -3,9 +3,8 @@ const getRandomInt = max => {
 	return Math.floor(Math.random() * (max + 1));
 };
 
-const getRandomElement = array => {
-	return array[Math.floor(Math.random() * array.length)];
-};
+const getRandomElement = array =>
+	array[Math.floor(Math.random() * array.length)];
 
 const shuffleArray = array => {
 	for (let i = array.length - 1; i > 0; i--) {
@@ -16,15 +15,33 @@ const shuffleArray = array => {
 	}
 };
 
+const answerClickHandler = e => {
+	if (parseInt(e.target.value) === correctAnswer) {
+		score++;
+		scoreCounter.innerText = score;
+		e.target.classList.add('correct');
+		equation.innerText = 'CORRECT!';
+	} else {
+		e.target.classList.add('incorrect');
+	}
+};
+
 const createAnswerButton = element => {
 	const answerButton = document.createElement('button');
 	answerButton.innerText = element;
-	root.appendChild(answerButton);
+	answerButton.value = element;
+	answerButton.addEventListener('click', answerClickHandler);
+	answerButtons.appendChild(answerButton);
 };
 
 ///
 
 const root = document.querySelector('#wrapper');
+const answerButtons = document.querySelector('#answers');
+const scoreCounter = document.querySelector('#scoreCounter');
+const equation = document.querySelector('#equation');
+
+let score = 0;
 const answers = [];
 
 const firstBond = document.querySelector('#randomBond');
