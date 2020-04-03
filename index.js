@@ -6,6 +6,12 @@ const getRandomInt = max => {
 const getRandomElement = array =>
 	array[Math.floor(Math.random() * array.length)];
 
+const deleteChildren = parent => {
+	for (let i = parent.children.length - 1; i >= 0; i--) {
+		parent.children[i].remove();
+	}
+};
+
 const shuffleArray = array => {
 	for (let i = array.length - 1; i > 0; i--) {
 		let j = Math.floor(Math.random() * (i + 1));
@@ -19,8 +25,10 @@ const answerClickHandler = e => {
 	if (parseInt(e.target.value) === correctAnswer) {
 		score++;
 		scoreCounter.innerText = score;
-		e.target.classList.add('correct');
-		equation.innerText = 'CORRECT!';
+		equation.innerHTML = '<p>CORRECT!</p>';
+		deleteChildren(answerButtons);
+		answers = [];
+		setTimeout(newEquation, 1000);
 	} else {
 		e.target.classList.add('incorrect');
 	}
@@ -34,29 +42,38 @@ const createAnswerButton = element => {
 	answerButtons.appendChild(answerButton);
 };
 
+const renderButtons = (array, buttonCreator) => array.map(buttonCreator);
+
+const newEquation = () => {
+	const equation = document.querySelector('#equation');
+	equation.innerHTML = `<span id="firstBond">0</span>+<span id="selectedNumber">?</span> =10`;
+
+	const firstBond = document.querySelector('#firstBond');
+	firstBond.innerText = getRandomInt(10);
+
+	correctAnswer = 10 - parseInt(firstBond.innerText);
+	answers.push(correctAnswer);
+
+	while (answers.length < 3) {
+		const wrongAnswer = getRandomInt(10);
+		if (answers.indexOf(wrongAnswer) === -1) {
+			answers.push(wrongAnswer);
+		}
+	}
+
+	shuffleArray(answers);
+
+	renderButtons(answers, createAnswerButton);
+};
+
 ///
 
 const root = document.querySelector('#wrapper');
-const answerButtons = document.querySelector('#answers');
 const scoreCounter = document.querySelector('#scoreCounter');
-const equation = document.querySelector('#equation');
+const answerButtons = document.querySelector('#answers');
 
 let score = 0;
-const answers = [];
+let correctAnswer = 0;
+let answers = [];
 
-const firstBond = document.querySelector('#randomBond');
-firstBond.innerText = getRandomInt(10);
-
-const correctAnswer = 10 - parseInt(firstBond.innerText);
-answers.push(correctAnswer);
-
-while (answers.length < 3) {
-	const wrongAnswer = getRandomInt(10);
-	if (answers.indexOf(wrongAnswer) === -1) {
-		answers.push(wrongAnswer);
-	}
-}
-
-shuffleArray(answers);
-
-const renderButtons = answers.map(createAnswerButton);
+newEquation();

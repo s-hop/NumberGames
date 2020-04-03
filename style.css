@@ -65,7 +65,7 @@ button {
 }
 
 .correct {
-	background-color: lawngreen;
+	color: lawngreen;
 }
 
 .incorrect {
