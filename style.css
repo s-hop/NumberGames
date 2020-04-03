@@ -23,9 +23,9 @@ body {
 	border-radius: 1rem;
 	padding: 2rem;
 	background-color: white;
+	box-shadow: 0px 2px 10px -3px rgba(43, 43, 43, 1);
 	-webkit-box-shadow: 0px 2px 10px -3px rgba(43, 43, 43, 1);
 	-moz-box-shadow: 0px 2px 10px -3px rgba(43, 43, 43, 1);
-	box-shadow: 0px 2px 10px -3px rgba(43, 43, 43, 1);
 }
 
 h1,
@@ -35,19 +35,42 @@ p {
 	text-align: center;
 }
 
+button {
+	border: none;
+	border-radius: 50%;
+	box-shadow: 0px 2px 10px -3px rgba(43, 43, 43, 1);
+	-webkit-box-shadow: 0px 2px 10px -3px rgba(43, 43, 43, 1);
+	-moz-box-shadow: 0px 2px 10px -3px rgba(43, 43, 43, 1);
+	padding: 0;
+	width: 7rem;
+	height: 7rem;
+	text-decoration: none;
+	background: #0069ed;
+	color: #ffffff;
+	font-size: 5rem;
+	cursor: pointer;
+	text-align: center;
+}
+
 #gameTitle {
+	grid-area: 'title';
+	margin: 0;
 	font-size: 5rem;
 }
 
 #score {
+	grid-area: 'score';
+	margin: 0;
+	padding: 2rem 0;
 	font-size: 3rem;
 }
 
 #equation {
+	grid-area: 'equation';
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 6rem;
+	font-size: 7rem;
 }
 
 #answers {
@@ -58,14 +81,8 @@ p {
 	font-size: 2rem;
 }
 
-button {
-	box-sizing: border-box;
-	width: 25%;
-	padding: 2rem;
-}
-
 .correct {
-	color: lawngreen;
+	background-color: green;
 }
 
 .incorrect {

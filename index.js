@@ -22,18 +22,20 @@ const shuffleArray = array => {
 };
 
 const answerClickHandler = e => {
+	const selectedAnswer = document.querySelector('#selectedAnswer');
+	e.target.removeEventListener('click', answerClickHandler);
+
 	if (parseInt(e.target.value) === correctAnswer) {
+		e.target.classList.add('correct');
 		score++;
 		scoreCounter.innerText = score;
-		equation.innerHTML = '<p>CORRECT!</p>';
-		deleteChildren(answerButtons);
+		selectedAnswer.innerText = correctAnswer;
 		answers = [];
 		setTimeout(newEquation, 800);
 	} else {
 		e.target.classList.add('incorrect');
 		score--;
 		scoreCounter.innerText = score;
-		e.target.removeEventListener('click', answerClickHandler);
 	}
 };
 
@@ -48,8 +50,10 @@ const createAnswerButton = element => {
 const renderButtons = (array, buttonCreator) => array.map(buttonCreator);
 
 const newEquation = () => {
+	deleteChildren(answerButtons);
+
 	const equation = document.querySelector('#equation');
-	equation.innerHTML = `<span id="firstBond">0</span>+<span id="selectedNumber">?</span> =10`;
+	equation.innerHTML = `<span id="firstBond"></span>+<span id="selectedAnswer">?</span> =10`;
 
 	const firstBond = document.querySelector('#firstBond');
 	firstBond.innerText = getRandomInt(10);
