@@ -28,9 +28,12 @@ const answerClickHandler = e => {
 		equation.innerHTML = '<p>CORRECT!</p>';
 		deleteChildren(answerButtons);
 		answers = [];
-		setTimeout(newEquation, 1000);
+		setTimeout(newEquation, 800);
 	} else {
 		e.target.classList.add('incorrect');
+		score--;
+		scoreCounter.innerText = score;
+		e.target.removeEventListener('click', answerClickHandler);
 	}
 };
 
