@@ -55,6 +55,7 @@ button {
 #gameTitle {
 	grid-area: 'title';
 	margin: 0;
+	padding: 2rem 0;
 	font-size: 5rem;
 }
 
@@ -87,4 +88,10 @@ button {
 
 .incorrect {
 	background-color: red;
+}
+
+@media only screen and (min-width: 600px) {
+	html {
+		font-size: 100%;
+	}
 }
